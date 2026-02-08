@@ -1,0 +1,28 @@
+meta {
+  name: email login
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/auth/sign-in/email
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Alice",
+    "email": "alice@example.com",
+    "password": "Str0ng!Pass"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
