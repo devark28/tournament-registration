@@ -1,9 +1,14 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { UserSession } from '@thallesp/nestjs-better-auth';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../../generated/prisma/client';
+import { PaginationDto } from '../lib/dto/pagination.dto';
 
 @Injectable()
 export class TeamsService {
@@ -74,8 +79,11 @@ export class TeamsService {
     });
   }
 
-  findAll() {
-    return this.prisma.team.findMany();
+  findAll(pagination: PaginationDto) {
+    return this.prisma.team.findMany({
+      skip: pagination.page * pagination.limit,
+      take: pagination.limit,
+    });
   }
 
   findOne(id: number) {

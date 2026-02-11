@@ -7,8 +7,10 @@ List the tests you chose and explain what each proves and why you chose it.
 2. max members during team registration
    - per the specification, a team can't register more than the configured number of members.
 3. better-auth sign-in and sign-up
-   - manual testing for better auth sign-in and sign-up
+   - manual testing for better auth sign-in and sign-up to ensure proper integration
 4. ability to create a tournament
    - per the specification, it's a core feature of the app
 5. ability to create a team
    - per the specification, it's a core feature of the app
+6. pagination of tournaments and teams
+   - manual testing for pagination to ensure proper working

@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Session, UserSession } from '@thallesp/nestjs-better-auth';
+import { PaginationDto } from '../lib/dto/pagination.dto';
 
 @Controller('teams')
 export class TeamsController {
@@ -26,8 +28,8 @@ export class TeamsController {
   }
 
   @Get()
-  findAll() {
-    return this.teamsService.findAll();
+  findAll(@Query() pagination: PaginationDto) {
+    return this.teamsService.findAll(pagination);
   }
 
   @Get(':id')

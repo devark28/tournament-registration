@@ -19,3 +19,4 @@
 
 ## What I would improve with more time
 - improve team members management and their removal
+- automate pagination tests to test it as a feature aside.

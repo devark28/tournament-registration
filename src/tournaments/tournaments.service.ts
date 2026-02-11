@@ -7,6 +7,7 @@ import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../../generated/prisma/client';
+import { PaginationDto } from '../lib/dto/pagination.dto';
 
 @Injectable()
 export class TournamentsService {
@@ -20,8 +21,11 @@ export class TournamentsService {
     });
   }
 
-  findAll() {
-    return this.prisma.tournament.findMany();
+  findAll(pagination: PaginationDto) {
+    return this.prisma.tournament.findMany({
+      skip: pagination.page * pagination.limit,
+      take: pagination.limit,
+    });
   }
 
   findOne(id: number) {

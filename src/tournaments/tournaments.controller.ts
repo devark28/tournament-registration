@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TournamentsService } from './tournaments.service';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
+import { PaginationDto } from '../lib/dto/pagination.dto';
 
 @Controller('tournaments')
 export class TournamentsController {
@@ -21,8 +23,8 @@ export class TournamentsController {
   }
 
   @Get()
-  findAll() {
-    return this.tournamentsService.findAll();
+  findAll(@Query() pagination: PaginationDto) {
+    return this.tournamentsService.findAll(pagination);
   }
 
   @Get(':id')
