@@ -14,10 +14,22 @@ export class TournamentsService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createTournamentDto: CreateTournamentDto) {
+    const creationData: Prisma.TournamentCreateInput = {
+      title: createTournamentDto.title,
+    };
+    if (createTournamentDto.registrationDeadline) {
+      creationData.registrationDeadline =
+        createTournamentDto.registrationDeadline;
+    }
+    if (createTournamentDto.startDate) {
+      creationData.startDate = createTournamentDto.startDate;
+    }
+    if (createTournamentDto.endDate) {
+      creationData.endDate = createTournamentDto.endDate;
+    }
+
     return this.prisma.tournament.create({
-      data: {
-        title: createTournamentDto.title,
-      },
+      data: creationData,
     });
   }
 
@@ -38,6 +50,17 @@ export class TournamentsService {
     const updateData: Prisma.TournamentUncheckedUpdateInput = {
       title: updateTournamentDto.title,
     };
+    if (updateTournamentDto.registrationDeadline) {
+      updateData.registrationDeadline =
+        updateTournamentDto.registrationDeadline;
+    }
+    if (updateTournamentDto.startDate) {
+      updateData.startDate = updateTournamentDto.startDate;
+    }
+    if (updateTournamentDto.endDate) {
+      updateData.endDate = updateTournamentDto.endDate;
+    }
+
     return this.prisma.tournament.update({
       where: { id },
       data: updateData,
@@ -60,7 +83,7 @@ export class TournamentsService {
       throw new NotFoundException('Tournament not found');
     }
 
-    // Check if registration deadline has passed
+    // Check if the registration deadline has passed
     if (tournament.registrationDeadline) {
       const now = new Date();
       if (now > tournament.registrationDeadline) {
@@ -70,7 +93,7 @@ export class TournamentsService {
       }
     }
 
-    // Check if team is already registered
+    // Check if the team is already registered
     if (tournament.teams.some((team) => team.id === teamId)) {
       throw new BadRequestException(
         'Team is already registered for this tournament',
