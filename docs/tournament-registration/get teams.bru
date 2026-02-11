@@ -1,0 +1,325 @@
+meta {
+  name: get teams
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{BASE_URL}}/teams?limit=10&page=0
+  body: json
+  auth: inherit
+}
+
+params:query {
+  limit: 10
+  page: 0
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+example {
+  name: get teams response default page and limit
+  description: defaults: page=0 and limit=10; base page=0
+  
+  request: {
+    url: {{BASE_URL}}/teams
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 848
+      etag: W/"350-VmoECj+tYx9fudVgKvH96lcpv+k"
+      date: Wed, 11 Feb 2026 20:36:41 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        [
+          {
+            "id": 1,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:25:32.683Z",
+            "updatedAt": "2026-02-11T20:25:32.683Z"
+          },
+          {
+            "id": 2,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:25:37.371Z",
+            "updatedAt": "2026-02-11T20:25:37.371Z"
+          },
+          {
+            "id": 3,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:25:39.259Z",
+            "updatedAt": "2026-02-11T20:25:39.259Z"
+          },
+          {
+            "id": 4,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:27:00.370Z",
+            "updatedAt": "2026-02-11T20:27:00.370Z"
+          },
+          {
+            "id": 5,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:27:22.341Z",
+            "updatedAt": "2026-02-11T20:27:22.341Z"
+          },
+          {
+            "id": 6,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:27:38.121Z",
+            "updatedAt": "2026-02-11T20:27:38.121Z"
+          },
+          {
+            "id": 7,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:27:43.140Z",
+            "updatedAt": "2026-02-11T20:27:43.140Z"
+          }
+        ]
+      '''
+    }
+  }
+}
+
+example {
+  name: get teams response page 1 limit 10
+  description: defaults: page=0 and limit=10; base page=0
+  
+  request: {
+    url: {{BASE_URL}}/teams?limit=10&page=1
+    method: GET
+    mode: none
+    params:query: {
+      limit: 10
+      page: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 1099
+      etag: W/"44b-ahBfjPwX1JbrHa38nkqfnUD/hDE"
+      date: Wed, 11 Feb 2026 20:42:05 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        [
+          {
+            "id": 12,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:16.362Z",
+            "updatedAt": "2026-02-11T20:40:16.362Z"
+          },
+          {
+            "id": 13,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:16.600Z",
+            "updatedAt": "2026-02-11T20:40:16.600Z"
+          },
+          {
+            "id": 14,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:16.855Z",
+            "updatedAt": "2026-02-11T20:40:16.855Z"
+          },
+          {
+            "id": 15,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:17.107Z",
+            "updatedAt": "2026-02-11T20:40:17.107Z"
+          },
+          {
+            "id": 16,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:17.365Z",
+            "updatedAt": "2026-02-11T20:40:17.365Z"
+          },
+          {
+            "id": 17,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:17.606Z",
+            "updatedAt": "2026-02-11T20:40:17.606Z"
+          },
+          {
+            "id": 18,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:17.856Z",
+            "updatedAt": "2026-02-11T20:40:17.856Z"
+          },
+          {
+            "id": 19,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:18.099Z",
+            "updatedAt": "2026-02-11T20:40:18.099Z"
+          },
+          {
+            "id": 20,
+            "name": "sample park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:18.354Z",
+            "updatedAt": "2026-02-11T20:40:18.354Z"
+          }
+        ]
+      '''
+    }
+  }
+}
+
+example {
+  name: get teams response page 0 limit 10
+  description: defaults: page=0 and limit=10; base page=0
+  
+  request: {
+    url: {{BASE_URL}}/teams?limit=10&page=0
+    method: GET
+    mode: none
+    params:query: {
+      limit: 10
+      page: 0
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 1213
+      etag: W/"4bd-HHVVv65LUX5ILKHX3dO5Psk09cs"
+      date: Wed, 11 Feb 2026 21:02:52 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        [
+          {
+            "id": 2,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:13.056Z",
+            "updatedAt": "2026-02-11T20:40:13.056Z"
+          },
+          {
+            "id": 3,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:13.713Z",
+            "updatedAt": "2026-02-11T20:40:13.713Z"
+          },
+          {
+            "id": 4,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:14.178Z",
+            "updatedAt": "2026-02-11T20:40:14.178Z"
+          },
+          {
+            "id": 5,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:14.563Z",
+            "updatedAt": "2026-02-11T20:40:14.563Z"
+          },
+          {
+            "id": 6,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:14.823Z",
+            "updatedAt": "2026-02-11T20:40:14.823Z"
+          },
+          {
+            "id": 7,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:15.083Z",
+            "updatedAt": "2026-02-11T20:40:15.083Z"
+          },
+          {
+            "id": 8,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:15.345Z",
+            "updatedAt": "2026-02-11T20:40:15.345Z"
+          },
+          {
+            "id": 9,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:15.581Z",
+            "updatedAt": "2026-02-11T20:40:15.581Z"
+          },
+          {
+            "id": 10,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:15.811Z",
+            "updatedAt": "2026-02-11T20:40:15.811Z"
+          },
+          {
+            "id": 11,
+            "name": "afri park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-11T20:40:16.089Z",
+            "updatedAt": "2026-02-11T20:40:16.089Z"
+          }
+        ]
+      '''
+    }
+  }
+}

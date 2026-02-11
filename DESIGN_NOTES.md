@@ -17,6 +17,5 @@
 - dangling/empty team risk: the team creator becomes a member automatically.
 
 ## What I'd do next
-- i need api validation for all controller DTOs.
 - add more tests and use e2e test to test better-auth integration since manual testing isn't scalable
 - add other authentication methods in better-auth

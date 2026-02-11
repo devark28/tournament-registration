@@ -1,11 +1,11 @@
 meta {
-  name: email sign up
+  name: email sign in
   type: http
-  seq: 3
+  seq: 4
 }
 
 post {
-  url: {{BASE_URL}}/api/auth/sign-up/email
+  url: {{BASE_URL}}/api/auth/sign-in/email
   body: json
   auth: inherit
 }
@@ -17,7 +17,6 @@ headers {
 
 body:json {
   {
-    "name": "User1",
     "email": "user1@example.com",
     "password": "Str0ng!Pass"
   }
@@ -29,10 +28,10 @@ settings {
 }
 
 example {
-  name: email sign up response
+  name: email sign in response
   
   request: {
-    url: {{BASE_URL}}/api/auth/sign-up/email
+    url: {{BASE_URL}}/api/auth/sign-in/email
     method: POST
     mode: json
     headers: {
@@ -57,7 +56,7 @@ example {
       access-control-allow-credentials: true
       content-type: application/json
       set-cookie: better-auth.session_token=<SESSION_TOKEN>; Max-Age=604800; Path=/; HttpOnly; SameSite=Lax
-      date: Wed, 11 Feb 2026 20:38:55 GMT
+      date: Wed, 11 Feb 2026 20:37:08 GMT
       connection: keep-alive
       keep-alive: timeout=5
       transfer-encoding: chunked
@@ -72,15 +71,16 @@ example {
       type: json
       content: '''
         {
+          "redirect": false,
           "token": "<SESSION_TOKEN>",
           "user": {
             "name": "User1",
             "email": "user1@example.com",
             "emailVerified": false,
             "image": null,
-            "createdAt": "2026-02-11T20:38:55.726Z",
-            "updatedAt": "2026-02-11T20:38:55.726Z",
-            "id": "XFymCSDTpIXXvn0kU9YFXSjSIWIwNhe8"
+            "createdAt": "2026-02-11T20:24:15.350Z",
+            "updatedAt": "2026-02-11T20:24:15.350Z",
+            "id": "eYatS9SJ1gnc0XwMRbby5NY39ofRBJNK"
           }
         }
       '''

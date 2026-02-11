@@ -1,7 +1,7 @@
 meta {
   name: create team
   type: http
-  seq: 4
+  seq: 5
 }
 
 post {
@@ -12,12 +12,80 @@ post {
 
 body:json {
   {
-    "name": "afri park",
-    "members": []
+    "name": "sample park",
+    "members": ["<USER_ID>"]
   }
 }
 
 settings {
   encodeUrl: true
   timeout: 0
+}
+
+example {
+  name: create team response
+  
+  request: {
+    url: {{BASE_URL}}/teams
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "name": "sample park",
+        "members": ["<USER_ID>"]
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 531
+      etag: W/"213-wIu5JQH1yqdWimVdKsKX/btLDxk"
+      date: Wed, 11 Feb 2026 20:27:43 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": 7,
+          "name": "sample park",
+          "maxMembers": 5,
+          "createdAt": "2026-02-11T20:27:43.140Z",
+          "updatedAt": "2026-02-11T20:27:43.140Z",
+          "members": [
+            {
+              "id": "eYatS9SJ1gnc0XwMRbby5NY39ofRBJNK",
+              "email": "user1@example.com",
+              "name": "User1",
+              "image": null,
+              "emailVerified": false,
+              "createdAt": "2026-02-11T20:24:15.350Z",
+              "updatedAt": "2026-02-11T20:24:15.350Z"
+            },
+            {
+              "id": "<USER_ID>",
+              "email": "user2@example.com",
+              "name": "User2",
+              "image": null,
+              "emailVerified": false,
+              "createdAt": "2026-02-11T20:26:18.211Z",
+              "updatedAt": "2026-02-11T20:26:18.211Z"
+            }
+          ]
+        }
+      '''
+    }
+  }
 }
