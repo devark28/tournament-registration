@@ -2,8 +2,8 @@
 
 ## Setup
 - Requirements: git, npm, node
-- Install: git clone, npm install
-- Run: npm run start:dev
+- Install: git clone <repo-url>; npm install; npx prisma migrate dev
+- Run: npm run db:up; npm run start:dev
 - Test: npm run test
 
 ## Assumptions
