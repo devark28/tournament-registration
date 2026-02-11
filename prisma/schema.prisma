@@ -74,6 +74,7 @@ model Verification {
 model Team {
   id          Int          @id @default(autoincrement())
   name        String
+  maxMembers  Int          @default(5)
   members     User[]
   tournaments Tournament[]
   createdAt   DateTime     @default(now())
@@ -81,11 +82,12 @@ model Team {
 }
 
 model Tournament {
-  id        Int       @id @default(autoincrement())
-  title     String
-  teams     Team[]
-  startDate DateTime?
-  endDate   DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id                   Int       @id @default(autoincrement())
+  title                String
+  registrationDeadline DateTime?
+  teams                Team[]
+  startDate            DateTime?
+  endDate              DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 }

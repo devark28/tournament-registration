@@ -1,4 +1,5 @@
 export class CreateTeamDto {
   name: string;
-  members: string[];
+  members?: string[];
+  maxMembers?: number;
 }

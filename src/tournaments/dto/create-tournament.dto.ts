@@ -1,6 +1,6 @@
 export class CreateTournamentDto {
   title: string;
-  teams: number[];
-  startDate: string;
-  endDate: string;
+  registrationDeadline?: Date;
+  startDate?: Date;
+  endDate?: Date;
 }
