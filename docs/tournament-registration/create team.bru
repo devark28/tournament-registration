@@ -1,0 +1,23 @@
+meta {
+  name: create team
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/teams
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "afri park",
+    "members": []
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
