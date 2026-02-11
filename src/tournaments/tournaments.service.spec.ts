@@ -5,6 +5,7 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('TournamentsService', () => {
   let service: TournamentsService;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let prismaService: PrismaService;
 
   const mockPrismaService = {
@@ -54,11 +55,21 @@ describe('TournamentsService', () => {
 
       const mockUpdatedTournament = {
         ...mockTournament,
-        teams: [{ id: 1, name: 'Test Team', maxMembers: 5, createdAt: new Date(), updatedAt: new Date() }],
+        teams: [
+          {
+            id: 1,
+            name: 'Test Team',
+            maxMembers: 5,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+        ],
       };
 
       mockPrismaService.tournament.findUnique.mockResolvedValue(mockTournament);
-      mockPrismaService.tournament.update.mockResolvedValue(mockUpdatedTournament);
+      mockPrismaService.tournament.update.mockResolvedValue(
+        mockUpdatedTournament,
+      );
 
       const result = await service.registerTeam(1, 1);
 
@@ -91,12 +102,12 @@ describe('TournamentsService', () => {
 
       mockPrismaService.tournament.findUnique.mockResolvedValue(mockTournament);
 
-      await expect(
-        service.registerTeam(1, 1)
-      ).rejects.toThrow(BadRequestException);
-      await expect(
-        service.registerTeam(1, 1)
-      ).rejects.toThrow('Registration deadline has passed for this tournament');
+      await expect(service.registerTeam(1, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      await expect(service.registerTeam(1, 1)).rejects.toThrow(
+        'Registration deadline has passed for this tournament',
+      );
 
       expect(mockPrismaService.tournament.update).not.toHaveBeenCalled();
     });
@@ -115,11 +126,21 @@ describe('TournamentsService', () => {
 
       const mockUpdatedTournament = {
         ...mockTournament,
-        teams: [{ id: 1, name: 'Test Team', maxMembers: 5, createdAt: new Date(), updatedAt: new Date() }],
+        teams: [
+          {
+            id: 1,
+            name: 'Test Team',
+            maxMembers: 5,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+        ],
       };
 
       mockPrismaService.tournament.findUnique.mockResolvedValue(mockTournament);
-      mockPrismaService.tournament.update.mockResolvedValue(mockUpdatedTournament);
+      mockPrismaService.tournament.update.mockResolvedValue(
+        mockUpdatedTournament,
+      );
 
       const result = await service.registerTeam(1, 1);
 
@@ -135,7 +156,15 @@ describe('TournamentsService', () => {
         id: 1,
         title: 'Test Tournament',
         registrationDeadline: futureDate,
-        teams: [{ id: 1, name: 'Test Team', maxMembers: 5, createdAt: new Date(), updatedAt: new Date() }],
+        teams: [
+          {
+            id: 1,
+            name: 'Test Team',
+            maxMembers: 5,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+        ],
         startDate: null,
         endDate: null,
         createdAt: new Date(),
@@ -144,12 +173,12 @@ describe('TournamentsService', () => {
 
       mockPrismaService.tournament.findUnique.mockResolvedValue(mockTournament);
 
-      await expect(
-        service.registerTeam(1, 1)
-      ).rejects.toThrow(BadRequestException);
-      await expect(
-        service.registerTeam(1, 1)
-      ).rejects.toThrow('Team is already registered for this tournament');
+      await expect(service.registerTeam(1, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      await expect(service.registerTeam(1, 1)).rejects.toThrow(
+        'Team is already registered for this tournament',
+      );
 
       expect(mockPrismaService.tournament.update).not.toHaveBeenCalled();
     });
@@ -157,23 +186,25 @@ describe('TournamentsService', () => {
     it('should reject registration for non-existent tournament', async () => {
       mockPrismaService.tournament.findUnique.mockResolvedValue(null);
 
-      await expect(
-        service.registerTeam(999, 1)
-      ).rejects.toThrow(NotFoundException);
-      await expect(
-        service.registerTeam(999, 1)
-      ).rejects.toThrow('Tournament not found');
+      await expect(service.registerTeam(999, 1)).rejects.toThrow(
+        NotFoundException,
+      );
+      await expect(service.registerTeam(999, 1)).rejects.toThrow(
+        'Tournament not found',
+      );
 
       expect(mockPrismaService.tournament.update).not.toHaveBeenCalled();
     });
 
     it('should reject registration exactly at deadline (boundary test)', async () => {
-      const now = new Date();
+      // Create a date slightly in the past to ensure the deadline has passed
+      const deadlineDate = new Date();
+      deadlineDate.setMilliseconds(deadlineDate.getMilliseconds() - 1);
 
       const mockTournament = {
         id: 1,
         title: 'Test Tournament',
-        registrationDeadline: now, // Exactly at deadline
+        registrationDeadline: deadlineDate,
         teams: [],
         startDate: null,
         endDate: null,
@@ -183,12 +214,14 @@ describe('TournamentsService', () => {
 
       mockPrismaService.tournament.findUnique.mockResolvedValue(mockTournament);
 
-      // Since now > registrationDeadline will be false at exact moment,
-      // but in practice this will likely fail due to execution time
-      await expect(
-        service.registerTeam(1, 1)
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.registerTeam(1, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      await expect(service.registerTeam(1, 1)).rejects.toThrow(
+        'Registration deadline has passed for this tournament',
+      );
+
+      expect(mockPrismaService.tournament.update).not.toHaveBeenCalled();
     });
   });
 });
-

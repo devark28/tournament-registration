@@ -2,9 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TeamsService } from './teams.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { Prisma } from '../../generated/prisma/client';
 
 describe('TeamsService', () => {
   let service: TeamsService;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let prismaService: PrismaService;
 
   const mockPrismaService = {
@@ -38,12 +40,22 @@ describe('TeamsService', () => {
 
   describe('create', () => {
     const mockSession = {
-      user: { id: 'captain-id', email: 'captain@test.com', name: 'Captain' },
+      user: {
+        id: 'captain-id',
+        email: 'captain@test.com',
+        name: 'Captain',
+        emailVerified: true,
+        image: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       session: {
         id: 'session-id',
         token: 'token',
         expiresAt: new Date(),
         userId: 'captain-id',
+        ipAddress: null,
+        userAgent: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -75,7 +87,7 @@ describe('TeamsService', () => {
         data: expect.objectContaining({
           name: 'Test Team',
           maxMembers: 5,
-        }),
+        }) as unknown as Prisma.TeamCreateArgs['data'],
         include: { members: true },
       });
     });
