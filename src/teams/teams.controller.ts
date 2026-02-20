@@ -14,6 +14,8 @@ import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Session, UserSession } from '@thallesp/nestjs-better-auth';
 import { PaginationDto } from '../lib/dto/pagination.dto';
+import { CreateTeamMemberDto } from './dto/create-team-member.dto';
+import { RemoveTeamMemberDto } from './dto/remove-team-member.dto';
 
 @Controller('teams')
 export class TeamsController {
@@ -30,6 +32,24 @@ export class TeamsController {
   @Get()
   findAll(@Query() pagination: PaginationDto) {
     return this.teamsService.findAll(pagination);
+  }
+
+  @Post(':id/members')
+  addMember(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createTeamMemberDto: CreateTeamMemberDto,
+    @Session() session: UserSession,
+  ) {
+    return this.teamsService.addMember(id, createTeamMemberDto, session);
+  }
+
+  @Delete(':id/members')
+  removeMember(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() removeTeamMemberDto: RemoveTeamMemberDto,
+    @Session() session: UserSession,
+  ) {
+    return this.teamsService.removeMember(id, removeTeamMemberDto, session);
   }
 
   @Get(':id')

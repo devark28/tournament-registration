@@ -20,7 +20,7 @@ model User {
   image         String?
   emailVerified Boolean @default(false)
 
-  teams Team[] // ← your existing relation
+  teams Member[] // ← your existing relation
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -71,11 +71,26 @@ model Verification {
   updatedAt DateTime @updatedAt
 }
 
+model Member {
+  id     Int        @id @default(autoincrement())
+  userId String
+  teamId Int
+  role   MemberRole @default(STANDARD)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, teamId])
+}
+
 model Team {
   id          Int          @id @default(autoincrement())
   name        String
   maxMembers  Int          @default(5)
-  members     User[]
+  members     Member[]
   tournaments Tournament[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
@@ -90,4 +105,9 @@ model Tournament {
   endDate              DateTime?
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
+}
+
+enum MemberRole {
+  STANDARD
+  CAPTAIN
 }

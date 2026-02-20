@@ -8,3 +8,8 @@ Write a short log of what went wrong, what you tried, and what fixed it.
 - tests were added to test functionality and requested changes.
 - better-auth doesn't need extensive testing as it's an already tested library during its devevelopment, we only need to test the its integration.
 - added validation to the api DTOs.
+
+- when registering a team, registration becomes a captain
+- after creating a team, the team needs:
+  - minimum number of members
+  - when the teams join the tournament, there is a minimum number for brackets to exist
