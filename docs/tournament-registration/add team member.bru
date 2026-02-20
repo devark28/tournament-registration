@@ -1,0 +1,134 @@
+meta {
+  name: add team member
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{BASE_URL}}/teams/:id/members
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 7
+}
+
+body:json {
+  {
+    "userId": "<USER_ID>"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+example {
+  name: add team member response
+  
+  request: {
+    url: {{BASE_URL}}/teams/:id/members
+    method: POST
+    mode: json
+    params:path: {
+      id: 7
+    }
+  
+    body:json: {
+      {
+        "userId": "<USER_ID>"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 288
+      etag: W/"120-SKUKcxmaNp0life/UVFOWsNU3Y4"
+      date: Fri, 20 Feb 2026 17:57:44 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": 9,
+          "userId": "<USER_ID>",
+          "teamId": 7,
+          "role": "STANDARD",
+          "createdAt": "2026-02-20T17:57:44.890Z",
+          "updatedAt": "2026-02-20T17:57:44.890Z",
+          "team": {
+            "id": 7,
+            "name": "other park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-20T17:38:13.505Z",
+            "updatedAt": "2026-02-20T17:38:13.505Z"
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: add team member error
+  
+  request: {
+    url: {{BASE_URL}}/teams/:id/members
+    method: POST
+    mode: json
+    params:path: {
+      id: 7
+    }
+  
+    body:json: {
+      {
+        "userId": "<USER_ID>"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 104
+      etag: W/"68-257q9OCiEfwABSom62nqOkRuyy8"
+      date: Fri, 20 Feb 2026 17:58:09 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "message": "You must be the captain to add members to this team",
+          "error": "Bad Request",
+          "statusCode": 400
+        }
+      '''
+    }
+  }
+}

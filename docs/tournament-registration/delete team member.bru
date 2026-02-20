@@ -1,0 +1,134 @@
+meta {
+  name: delete team member
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{BASE_URL}}/teams/:id/members
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 7
+}
+
+body:json {
+  {
+    "userId": "<USER_ID>"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+example {
+  name: delete team member response
+  
+  request: {
+    url: {{BASE_URL}}/teams/:id/members
+    method: DELETE
+    mode: json
+    params:path: {
+      id: 7
+    }
+  
+    body:json: {
+      {
+        "userId": "<USER_ID>"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 288
+      etag: W/"120-KgTqNW08bVN3DxcPlYb6iE3unyU"
+      date: Fri, 20 Feb 2026 17:57:17 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": 8,
+          "userId": "<USER_ID>",
+          "teamId": 7,
+          "role": "STANDARD",
+          "createdAt": "2026-02-20T17:56:09.004Z",
+          "updatedAt": "2026-02-20T17:56:09.004Z",
+          "team": {
+            "id": 7,
+            "name": "other park",
+            "maxMembers": 5,
+            "createdAt": "2026-02-20T17:38:13.505Z",
+            "updatedAt": "2026-02-20T17:38:13.505Z"
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: delete team member error
+  
+  request: {
+    url: {{BASE_URL}}/teams/:id/members
+    method: DELETE
+    mode: json
+    params:path: {
+      id: 7
+    }
+  
+    body:json: {
+      {
+        "userId": "<USER_ID>"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      vary: Origin
+      access-control-allow-credentials: true
+      content-type: application/json; charset=utf-8
+      content-length: 109
+      etag: W/"6d-/Pi8xfsgtU2eLl6ZDT8wien5XBU"
+      date: Fri, 20 Feb 2026 17:58:22 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "message": "You must be the captain to remove members from this team",
+          "error": "Bad Request",
+          "statusCode": 400
+        }
+      '''
+    }
+  }
+}
