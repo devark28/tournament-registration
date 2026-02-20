@@ -14,3 +14,7 @@ List the tests you chose and explain what each proves and why you chose it.
    - per the specification, it's a core feature of the app
 6. pagination of tournaments and teams
    - manual testing for pagination to ensure proper working
+7. the team creator becomes the team captain
+    - per the specification, the team creator becomes the team captain
+8. only the team captain can add/remove team members
+    - per the specification, only the team captain can add/remove team members

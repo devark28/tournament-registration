@@ -2,6 +2,7 @@
 - nestjs, prisma, better-auth fast setup without all docs
 - debugging better-auth setup
 - test writing according to the test plan
+- test fixing according to the test plan
 
 ## Tools used
 - chatgpt, copilot
